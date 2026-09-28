@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestion d'Étudiants</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <main class="main-cont">
+
+        <!-- TOP -->
+        <div class="top">
+
+            <div class="titre">
+                <h1>Listes des étudiants</h1>
+            </div>
+
+            <div class="head">
+                      <!-- Barre de recherche -->
+                <div class="recherchebar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Rechercher un étudiant">
+                </div>
+
+                <button class="nouvel" id="btnaj">
+                    <i class="fas fa-user-plus"></i>
+                    Nouvel étudiant
+                </button>
+
+            </div>
+        </div>
+
+        <!-- tableau -->
+        <div class="box1">
+
+            <h3>
+                <i class="fas fa-list-ul"></i>
+                Liste des étudiants
+            </h3>
+            <!-- Onglets ACTIFS ET ARCHIVEs -->
+            <div class="tabs">
+            <button class="tab-btn active" data-tab="actifs"> <i class="fas fa-users"> </i> Étudiants actifs</button>
+            <button class="tab-btn" data-tab="archives"> <i class="fas fa-archive"> </i> Archives</button>
+            </div>
+
+            <div style="overflow-x:auto">
+
+                <table id="tab_etudiant" border="1" >
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Code</th>
+                            <th>Numéro</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Date de naissance</th>
+                            <th>Classe</th>
+                            <th>Etat</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tbody">
+                    <!-- Le corps du tableau app.js va le remplir automatiquement -->
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Ajouter etudiant -->
+<div id="studentModal" class="modal-overlay">
+
+    <div class="modal-container">
+
+        <h3 id="ajoutetud">Ajouter un étudiant</h3>
+
+        <input type="hidden" id="editId">
+
+        <div class="input-group">
+            <label>Code</label>
+            <input type="text" id="code">
+        </div>
+
+        <div class="input-group">
+            <label>Numéro</label>
+            <input type="text" id="num">
+        </div>
+
+        <div class="input-group">
+            <label>Nom</label>
+            <input type="text" id="etudnom">
+        </div>
+
+        <div class="input-group">
+            <label>prenom</label>
+            <input type="text" id="etudpre">
+        </div>
+
+
+        <div class="input-group">
+            <label>Date de naissance</label>
+            <input type="date" id="daten">
+        </div>
+
+        <div class="input-group">
+            <label>Filiére</label>
+			<select id="id_classe">
+    <option value="1">6ème A</option>
+    <option value="2">6ème B</option>
+    <option value="3">6ème C</option>
+    <option value="4">6ème D</option>
+    <option value="5">5ème A</option>
+    <option value="6">5ème B</option>
+    <option value="7">5ème C</option>
+    <option value="8">5ème D</option>
+    <option value="9">4ème A</option>
+    <option value="10">4ème B</option>
+    <option value="11">4ème C</option>
+    <option value="12">4ème D</option>
+</select>
+        </div>
+
+        <div class="btns">
+
+            <button class="btn_annuler" id="btn1">Annuler</button>
+            <button class="btn_enregistrer" id="btn2">Enregistrer</button>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- Pagination -->
+<div id="pagination">
+    <button id="btn_prec"> Précédent </button>
+    <span id="info_page"> Page 1 </span>
+    <button id ="btn_suivant"> Suivant </button>
+</div>
+
+<!--importtttttJSON--->
+ <div>
+      <label class="file-label btn-outline" for="jsonImport"><i class="fas fa-upload"></i> Importer JSON</label>
+      <input type="file" id="jsonImport" accept=".json" style="display:none">
+      <button id="btn_import" class="btn-outline" style="margin-left: 8px;"><i class="fas fa-sync-alt"></i> Rafraîchir</button>
+    </div>
+<script src="js/app.js"></script>
+
+</body>
+</html>
+
