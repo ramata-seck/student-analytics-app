@@ -4,6 +4,354 @@ from schemas import creer_Etudiant, modifier_etudiant
 
 route = APIRouter()
 
+# ── Route — Notes d'un étudiant ─────────────────────────
+@route.get("/api/v1/etudiants/{id}/notes")
+def get_notes_etudiant(id: int):
+
+    connexion = fonct_connexion()
+    curseur = connexion.cursor()
+
+    # Vérifier que l'étudiant existe
+    curseur.execute("""
+        SELECT e.id, e.nom, e.prenom, c.nom_classe
+        FROM etudiants e
+        JOIN classes c ON e.id_classe = c.id_classe
+        WHERE e.id = %s
+    """, (id,))
+
+    etudiant = curseur.fetchone()
+
+    if not etudiant:
+        curseur.close()
+        connexion.close()
+        raise HTTPException(status_code=404, detail="Étudiant non trouvé")
+
+    # Récupérer les matières et les notes
+    curseur.execute("""
+        SELECT
+            m.nom_matiere,
+            em.moyenne_matiere,
+            n.valeur_note,
+            n.type_note
+        FROM etudiant_matieres em
+        JOIN matieres m
+            ON em.id_matiere = m.id_matiere
+        JOIN notes n
+            ON em.id_em = n.id_em
+        WHERE em.id_etudiant = %s
+        ORDER BY m.nom_matiere, n.type_note
+    """, (id,))
+
+    rows = curseur.fetchall()
+
+    curseur.close()
+    connexion.close()
+
+    # Organiser les résultats
+    matieres = {}
+
+    for nom_matiere, moyenne, valeur, type_note in rows:
+
+        if nom_matiere not in matieres:
+            matieres[nom_matiere] = {
+                "devoirs": [],
+                "examen": None,
+                "moyenne": float(moyenne)
+            }
+
+        if type_note == "Devoir":
+            matieres[nom_matiere]["devoirs"].append(float(valeur))
+
+        elif type_note == "Examen":
+            matieres[nom_matiere]["examen"] = float(valeur)
+
+    return {
+        "etudiant": {
+            "id": etudiant[0],
+            "nom": etudiant[1],
+            "prenom": etudiant[2],
+            "classe": etudiant[3]
+        },
+        "matieres": matieres
+    }
+# ── Route — Notes d'un étudiant ─────────────────────────
+@route.get("/api/v1/etudiants/{id}/notes")
+def get_notes_etudiant(id: int):
+
+    connexion = fonct_connexion()
+    curseur = connexion.cursor()
+
+    # Vérifier que l'étudiant existe
+    curseur.execute("""
+        SELECT e.id, e.nom, e.prenom, c.nom_classe
+        FROM etudiants e
+        JOIN classes c ON e.id_classe = c.id_classe
+        WHERE e.id = %s
+    """, (id,))
+
+    etudiant = curseur.fetchone()
+
+    if not etudiant:
+        curseur.close()
+        connexion.close()
+        raise HTTPException(status_code=404, detail="Étudiant non trouvé")
+
+    # Récupérer les matières et les notes
+    curseur.execute("""
+        SELECT
+            m.nom_matiere,
+            em.moyenne_matiere,
+            n.valeur_note,
+            n.type_note
+        FROM etudiant_matieres em
+        JOIN matieres m
+            ON em.id_matiere = m.id_matiere
+        JOIN notes n
+            ON em.id_em = n.id_em
+        WHERE em.id_etudiant = %s
+        ORDER BY m.nom_matiere, n.type_note
+    """, (id,))
+
+    rows = curseur.fetchall()
+
+    curseur.close()
+    connexion.close()
+
+    # Organiser les résultats
+    matieres = {}
+
+    for nom_matiere, moyenne, valeur, type_note in rows:
+
+        if nom_matiere not in matieres:
+            matieres[nom_matiere] = {
+                "devoirs": [],
+                "examen": None,
+                "moyenne": float(moyenne)
+            }
+
+        if type_note == "Devoir":
+            matieres[nom_matiere]["devoirs"].append(float(valeur))
+
+        elif type_note == "Examen":
+            matieres[nom_matiere]["examen"] = float(valeur)
+
+    return {
+        "etudiant": {
+            "id": etudiant[0],
+            "nom": etudiant[1],
+            "prenom": etudiant[2],
+            "classe": etudiant[3]
+        },
+        "matieres": matieres
+    }# ── Route — Notes d'un étudiant ─────────────────────────
+@route.get("/api/v1/etudiants/{id}/notes")
+def get_notes_etudiant(id: int):
+
+    connexion = fonct_connexion()
+    curseur = connexion.cursor()
+
+    # Vérifier que l'étudiant existe
+    curseur.execute("""
+        SELECT e.id, e.nom, e.prenom, c.nom_classe
+        FROM etudiants e
+        JOIN classes c ON e.id_classe = c.id_classe
+        WHERE e.id = %s
+    """, (id,))
+
+    etudiant = curseur.fetchone()
+
+    if not etudiant:
+        curseur.close()
+        connexion.close()
+        raise HTTPException(status_code=404, detail="Étudiant non trouvé")
+
+    # Récupérer les matières et les notes
+    curseur.execute("""
+        SELECT
+            m.nom_matiere,
+            em.moyenne_matiere,
+            n.valeur_note,
+            n.type_note
+        FROM etudiant_matieres em
+        JOIN matieres m
+            ON em.id_matiere = m.id_matiere
+        JOIN notes n
+            ON em.id_em = n.id_em
+        WHERE em.id_etudiant = %s
+        ORDER BY m.nom_matiere, n.type_note
+    """, (id,))
+
+    rows = curseur.fetchall()
+
+    curseur.close()
+    connexion.close()
+
+    # Organiser les résultats
+    matieres = {}
+
+    for nom_matiere, moyenne, valeur, type_note in rows:
+
+        if nom_matiere not in matieres:
+            matieres[nom_matiere] = {
+                "devoirs": [],
+                "examen": None,
+                "moyenne": float(moyenne)
+            }
+
+        if type_note == "Devoir":
+            matieres[nom_matiere]["devoirs"].append(float(valeur))
+
+        elif type_note == "Examen":
+            matieres[nom_matiere]["examen"] = float(valeur)
+
+    return {
+        "etudiant": {
+            "id": etudiant[0],
+            "nom": etudiant[1],
+            "prenom": etudiant[2],
+            "classe": etudiant[3]
+        },
+        "matieres": matieres
+    }# ── Route — Notes d'un étudiant ─────────────────────────
+@route.get("/api/v1/etudiants/{id}/notes")
+def get_notes_etudiant(id: int):
+
+    connexion = fonct_connexion()
+    curseur = connexion.cursor()
+
+    # Vérifier que l'étudiant existe
+    curseur.execute("""
+        SELECT e.id, e.nom, e.prenom, c.nom_classe
+        FROM etudiants e
+        JOIN classes c ON e.id_classe = c.id_classe
+        WHERE e.id = %s
+    """, (id,))
+
+    etudiant = curseur.fetchone()
+
+    if not etudiant:
+        curseur.close()
+        connexion.close()
+        raise HTTPException(status_code=404, detail="Étudiant non trouvé")
+
+    # Récupérer les matières et les notes
+    curseur.execute("""
+        SELECT
+            m.nom_matiere,
+            em.moyenne_matiere,
+            n.valeur_note,
+            n.type_note
+        FROM etudiant_matieres em
+        JOIN matieres m
+            ON em.id_matiere = m.id_matiere
+        JOIN notes n
+            ON em.id_em = n.id_em
+        WHERE em.id_etudiant = %s
+        ORDER BY m.nom_matiere, n.type_note
+    """, (id,))
+
+    rows = curseur.fetchall()
+
+    curseur.close()
+    connexion.close()
+
+    # Organiser les résultats
+    matieres = {}
+
+    for nom_matiere, moyenne, valeur, type_note in rows:
+
+        if nom_matiere not in matieres:
+            matieres[nom_matiere] = {
+                "devoirs": [],
+                "examen": None,
+                "moyenne": float(moyenne)
+            }
+
+        if type_note == "Devoir":
+            matieres[nom_matiere]["devoirs"].append(float(valeur))
+
+        elif type_note == "Examen":
+            matieres[nom_matiere]["examen"] = float(valeur)
+
+    return {
+        "etudiant": {
+            "id": etudiant[0],
+            "nom": etudiant[1],
+            "prenom": etudiant[2],
+            "classe": etudiant[3]
+        },
+        "matieres": matieres
+    }# ── Route — Notes d'un étudiant ─────────────────────────
+@route.get("/api/v1/etudiants/{id}/notes")
+def get_notes_etudiant(id: int):
+
+    connexion = fonct_connexion()
+    curseur = connexion.cursor()
+
+    # Vérifier que l'étudiant existe
+    curseur.execute("""
+        SELECT e.id, e.nom, e.prenom, c.nom_classe
+        FROM etudiants e
+        JOIN classes c ON e.id_classe = c.id_classe
+        WHERE e.id = %s
+    """, (id,))
+
+    etudiant = curseur.fetchone()
+
+    if not etudiant:
+        curseur.close()
+        connexion.close()
+        raise HTTPException(status_code=404, detail="Étudiant non trouvé")
+
+    # Récupérer les matières et les notes
+    curseur.execute("""
+        SELECT
+            m.nom_matiere,
+            em.moyenne_matiere,
+            n.valeur_note,
+            n.type_note
+        FROM etudiant_matieres em
+        JOIN matieres m
+            ON em.id_matiere = m.id_matiere
+        JOIN notes n
+            ON em.id_em = n.id_em
+        WHERE em.id_etudiant = %s
+        ORDER BY m.nom_matiere, n.type_note
+    """, (id,))
+
+    rows = curseur.fetchall()
+
+    curseur.close()
+    connexion.close()
+
+    # Organiser les résultats
+    matieres = {}
+
+    for nom_matiere, moyenne, valeur, type_note in rows:
+
+        if nom_matiere not in matieres:
+            matieres[nom_matiere] = {
+                "devoirs": [],
+                "examen": None,
+                "moyenne": float(moyenne)
+            }
+
+        if type_note == "Devoir":
+            matieres[nom_matiere]["devoirs"].append(float(valeur))
+
+        elif type_note == "Examen":
+            matieres[nom_matiere]["examen"] = float(valeur)
+
+    return {
+        "etudiant": {
+            "id": etudiant[0],
+            "nom": etudiant[1],
+            "prenom": etudiant[2],
+            "classe": etudiant[3]
+        },
+        "matieres": matieres
+    }
+
 # ── Route 6 — Liste des étudiants ───────────────────────
 @route.get("/api/v1/etudiants")
 def get_etudiants(page: int = 1, limite: int = 5, recherche: str = "",archive: bool=False):

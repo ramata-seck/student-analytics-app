@@ -51,7 +51,30 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
     margin-bottom: 25px;
+}
+
+.titre h1 {
+    font-size: 28px;
+    color: #0F2742;
+    margin-bottom: 5px;
+}
+
+.titre p {
+    color: #64748B;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   HEAD
+========================================================= */
+
+.head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 
@@ -65,7 +88,7 @@ body {
     gap: 10px;
 
     background: #FFFFFF;
-    padding: 9px 16px;
+    padding: 10px 16px;
 
     border-radius: 10px;
     border: 1px solid #E2E8F0;
@@ -73,11 +96,16 @@ body {
     box-shadow: 0 2px 6px rgba(15, 39, 66, 0.05);
 }
 
+.recherchebar i {
+    color: #64748B;
+}
+
 .recherchebar input {
     border: none;
     outline: none;
     color: #1E293B;
     font-size: 14px;
+    width: 220px;
 }
 
 .recherchebar input::placeholder {
@@ -93,13 +121,11 @@ body {
     background: #2563EB;
     color: white;
 
-    padding: 10px 18px;
+    padding: 11px 18px;
     border-radius: 8px;
 
     border: none;
     cursor: pointer;
-
-    margin-top: 25px;
 
     font-weight: 600;
 
@@ -112,51 +138,156 @@ body {
 
 
 /* =========================================================
-   BOUTON ENREGISTRER
+   BOX TABLEAU
 ========================================================= */
 
-.btn_enregistrer {
-    background: #2563EB;
+.box1 {
+    background: #FFFFFF;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    border: 1px solid #E2E8F0;
+
+    box-shadow: 0 4px 12px rgba(15, 39, 66, 0.06);
+}
+
+.box1 h3 {
+    color: #0F2742;
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    margin-bottom: 12px;
+}
+
+.tab-btn {
+    background: #0F2742;
+
     color: white;
 
     padding: 10px 18px;
+
     border-radius: 8px;
 
     border: none;
-    cursor: pointer;
 
-    margin-top: 20px;
+    cursor: pointer;
 
     font-weight: 600;
 
     transition: 0.2s;
 }
 
-.btn_enregistrer:hover {
-    background: #1D4ED8;
+.tab-btn:hover {
+    background: #1E3A5F;
+}
+
+.tab-btn.active {
+    background: #2563EB;
 }
 
 
 /* =========================================================
-   BOUTON ANNULER
+   CONTENEUR TABLEAU
 ========================================================= */
 
-.btn_annuler {
-    background: #F1F5F9;
-    color: #334155;
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
 
-    padding: 10px 18px;
-    border-radius: 8px;
 
-    border: 1px solid #E2E8F0;
+/* =========================================================
+   TABLEAU
+========================================================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+
+/* En-tête */
+
+th {
+    background-color: #0F2742;
+    color: white;
+
+    padding: 13px 12px;
+
+    text-align: left;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* Cellules */
+
+td {
+    padding: 11px 12px;
+
+    border-bottom: 1px solid #E2E8F0;
+
+    font-size: 14px;
+}
+
+
+/* Alternance */
+
+tbody tr:nth-child(even) {
+    background-color: #F8FAFC;
+}
+
+
+/* Survol */
+
+tbody tr:hover {
+    background-color: #EFF6FF;
+}
+
+
+/* =========================================================
+   ACTIONS / NOTES
+========================================================= */
+
+.btn_notes {
+    background: #2563EB;
+    color: white;
+
+    border: none;
+    border-radius: 7px;
+
+    padding: 7px 11px;
 
     cursor: pointer;
+
+    font-weight: 500;
+
+    white-space: nowrap;
 
     transition: 0.2s;
 }
 
-.btn_annuler:hover {
-    background: #E2E8F0;
+.btn_notes:hover {
+    background: #1D4ED8;
+}
+
+.btn_notes i {
+    margin-right: 5px;
 }
 
 
@@ -213,213 +344,8 @@ body {
 
 
 /* =========================================================
-   CONTENEUR DU TABLEAU
-========================================================= */
-
-.box1 {
-    background: #FFFFFF;
-
-    padding: 20px;
-
-    border-radius: 14px;
-
-    border: 1px solid #E2E8F0;
-
-    box-shadow: 0 4px 12px rgba(15, 39, 66, 0.06);
-}
-
-
-/* =========================================================
-   TABLEAU
-========================================================= */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-
-/* En-tête */
-
-th {
-    background-color: #0F2742;
-    color: white;
-
-    padding: 13px 12px;
-
-    text-align: left;
-
-    font-size: 13px;
-    font-weight: 600;
-}
-
-
-/* Cellules */
-
-td {
-    padding: 11px 12px;
-
-    border-bottom: 1px solid #E2E8F0;
-
-    font-size: 14px;
-}
-
-
-/* Alternance */
-
-tr:nth-child(even) {
-    background-color: #F8FAFC;
-}
-
-
-/* Survol */
-
-tr:hover {
-    background-color: #EFF6FF;
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal-overlay {
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: rgba(15, 23, 42, 0.55);
-
-    display: none;
-
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-overlay.active {
-    display: flex;
-}
-
-
-.modal-container {
-    background: #FFFFFF;
-
-    padding: 25px;
-
-    border-radius: 14px;
-
-    width: 400px;
-
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
-}
-
-
-/* =========================================================
-   CHAMPS DU FORMULAIRE
-========================================================= */
-
-.input-group {
-    margin-bottom: 15px;
-}
-
-
-.input-group input,
-.input-group select {
-    width: 100%;
-
-    padding: 10px;
-
-    border-radius: 7px;
-
-    border: 1px solid #CBD5E1;
-
-    outline: none;
-
-    color: #1E293B;
-
-    transition: 0.2s;
-}
-
-
-.input-group input:focus,
-.input-group select:focus {
-    border-color: #2563EB;
-
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
-}
-
-
-/* =========================================================
-   BOUTONS DU FORMULAIRE
-========================================================= */
-
-.btns {
-    display: flex;
-
-    justify-content: flex-end;
-
-    gap: 10px;
-}
-
-
-/* =========================================================
-   PAGINATION
-========================================================= */
-
-#pagination {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    justify-content: center;
-
-    margin-top: 15px;
-}
-
-
-#pagination button {
-    padding: 8px 16px;
-
-    background-color: #0F2742;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-
-#pagination button:hover {
-    background-color: #1E3A5F;
-}
-
-
-#pagination button:disabled {
-    background-color: #CBD5E1;
-
-    color: #64748B;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
    BADGES SOURCE
 ========================================================= */
-
-/* Étudiant provenant de la base de données */
 
 .bdd {
     background-color: #7C3AED;
@@ -434,9 +360,6 @@ tr:hover {
 
     font-weight: 600;
 }
-
-
-/* Étudiant provenant du fichier JSON */
 
 .json {
     background-color: #2563EB;
@@ -454,12 +377,257 @@ tr:hover {
 
 
 /* =========================================================
-   BOUTON DE CHANGEMENT D'AFFICHAGE
+   PAGINATION
 ========================================================= */
 
-.tab-btn {
-    background: #0F2742;
+#pagination {
+    display: flex;
 
+    align-items: center;
+
+    gap: 15px;
+
+    justify-content: center;
+
+    margin-top: 18px;
+}
+
+#pagination button {
+    padding: 8px 16px;
+
+    background-color: #0F2742;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#pagination button:hover:not(:disabled) {
+    background-color: #1E3A5F;
+}
+
+#pagination button:disabled {
+    background-color: #CBD5E1;
+
+    color: #64748B;
+
+    cursor: not-allowed;
+}
+
+#info_page {
+    font-weight: 600;
+    color: #475569;
+}
+
+
+/* =========================================================
+   IMPORT JSON
+========================================================= */
+
+.import-section {
+    margin-top: 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    border: 1px solid #CBD5E1;
+
+    background: white;
+
+    color: #334155;
+
+    cursor: pointer;
+
+    font-weight: 500;
+
+    transition: 0.2s;
+}
+
+.btn-outline:hover {
+    background: #F8FAFC;
+    border-color: #94A3B8;
+}
+
+
+/* =========================================================
+   MODAL GÉNÉRAL
+========================================================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(15, 23, 42, 0.55);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+
+/* =========================================================
+   MODAL ÉTUDIANT
+========================================================= */
+
+.modal-container {
+    background: #FFFFFF;
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    width: 400px;
+
+    max-width: 100%;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+}
+
+
+/* En-tête modal */
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 20px;
+}
+
+.modal-header h3 {
+    color: #0F2742;
+    margin-bottom: 5px;
+}
+
+.modal-header p {
+    color: #64748B;
+    font-size: 13px;
+}
+
+
+/* Bouton fermer */
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #F1F5F9;
+
+    color: #475569;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.modal-close:hover {
+    background: #E2E8F0;
+    color: #0F172A;
+}
+
+
+/* =========================================================
+   CHAMPS FORMULAIRE
+========================================================= */
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #334155;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+
+    padding: 10px;
+
+    border-radius: 7px;
+
+    border: 1px solid #CBD5E1;
+
+    outline: none;
+
+    color: #1E293B;
+
+    background: white;
+
+    transition: 0.2s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #2563EB;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   BOUTONS FORMULAIRE
+========================================================= */
+
+.btns {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.btn_enregistrer {
+    background: #2563EB;
     color: white;
 
     padding: 10px 18px;
@@ -470,16 +638,32 @@ tr:hover {
 
     cursor: pointer;
 
-    margin-top: 20px;
-    margin-bottom: 10px;
-
     font-weight: 600;
 
     transition: 0.2s;
 }
 
-.tab-btn:hover {
-    background: #1E3A5F;
+.btn_enregistrer:hover {
+    background: #1D4ED8;
+}
+
+.btn_annuler {
+    background: #F1F5F9;
+    color: #334155;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    border: 1px solid #E2E8F0;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn_annuler:hover {
+    background: #E2E8F0;
 }
 
 
@@ -492,7 +676,6 @@ tr.en-edition {
 
     outline: 2px solid #F59E0B;
 }
-
 
 .input-edition {
     width: 100%;
@@ -514,5 +697,364 @@ tr.en-edition {
     border-color: #D97706;
 
     box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.10);
+}
+
+
+/* =========================================================
+   MODAL RELEVÉ DE NOTES
+========================================================= */
+
+.notes-modal-container {
+    background: #FFFFFF;
+
+    width: 900px;
+
+    max-width: 100%;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    border-radius: 16px;
+
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
+
+    padding: 25px;
+}
+
+
+/* =========================================================
+   EN-TÊTE RELEVÉ
+========================================================= */
+
+.notes-modal-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.notes-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.notes-title > i {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #EFF6FF;
+
+    color: #2563EB;
+
+    border-radius: 10px;
+
+    font-size: 20px;
+}
+
+.notes-title h2 {
+    color: #0F2742;
+
+    font-size: 21px;
+
+    margin-bottom: 4px;
+}
+
+.notes-title p {
+    color: #64748B;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RÉSUMÉ ÉTUDIANT
+========================================================= */
+
+.student-summary {
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.student-summary-item {
+    background: #F8FAFC;
+
+    border: 1px solid #E2E8F0;
+
+    border-radius: 10px;
+
+    padding: 12px 16px;
+
+    min-width: 180px;
+}
+
+.student-summary-item span {
+    display: block;
+
+    color: #64748B;
+
+    font-size: 12px;
+
+    margin-bottom: 4px;
+}
+
+.student-summary-item strong {
+    color: #0F2742;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   TABLEAU NOTES
+========================================================= */
+
+.notes-table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.notes-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin: 0;
+}
+
+.notes-table th {
+    background: #0F2742;
+
+    color: white;
+
+    padding: 12px 10px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+.notes-table th:first-child {
+    text-align: left;
+}
+
+.notes-table td {
+    padding: 11px 10px;
+
+    border-bottom: 1px solid #E2E8F0;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+.notes-table td:first-child {
+    text-align: left;
+
+    font-weight: 600;
+
+    color: #0F2742;
+}
+
+.notes-table tbody tr:nth-child(even) {
+    background: #F8FAFC;
+}
+
+.notes-table tbody tr:hover {
+    background: #EFF6FF;
+}
+
+
+/* Moyenne */
+
+.moyenne-cell {
+    font-weight: 700;
+
+    color: #2563EB;
+}
+
+
+/* =========================================================
+   CHARGEMENT
+========================================================= */
+
+.notes-loading {
+    display: none;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    color: #64748B;
+}
+
+.notes-loading.active {
+    display: block;
+}
+
+.notes-loading i {
+    margin-right: 8px;
+
+    color: #2563EB;
+}
+
+
+/* =========================================================
+   CONTENU NOTES
+========================================================= */
+
+.notes-content {
+    display: none;
+}
+
+.notes-content.active {
+    display: block;
+}
+
+
+/* =========================================================
+   ERREUR NOTES
+========================================================= */
+
+.notes-error {
+    display: none;
+
+    padding: 15px;
+
+    background: #FEF2F2;
+
+    color: #B91C1C;
+
+    border: 1px solid #FECACA;
+
+    border-radius: 8px;
+
+    margin-top: 15px;
+}
+
+.notes-error.active {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   FOOTER NOTES
+========================================================= */
+
+.notes-modal-footer {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #E2E8F0;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .main-cont {
+        padding: 15px;
+    }
+
+    .top {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .head {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .recherchebar input {
+        width: 100%;
+    }
+
+    .nouvel {
+        width: 100%;
+    }
+
+    .student-summary {
+        flex-direction: column;
+    }
+
+    .student-summary-item {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .box1 {
+        padding: 12px;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        width: 100%;
+    }
+
+    .import-section {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .btn-outline {
+        justify-content: center;
+    }
+
+    .notes-modal-container {
+        padding: 15px;
+    }
+
+    .notes-title h2 {
+        font-size: 18px;
+    }
+
 }
 ```

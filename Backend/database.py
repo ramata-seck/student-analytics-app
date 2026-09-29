@@ -15,3 +15,5 @@ def fonct_connexion():
         password=os.getenv("DB_PASSWORD"),
         port=os.getenv("DB_PORT")
     )
+
+

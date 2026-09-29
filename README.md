@@ -1,9 +1,8 @@
-# student-analytics-app
 # 🎓 Student Analytics App
 
-API REST de gestion des étudiants développée avec **FastAPI** et **PostgreSQL** dans le cadre de la formation ODC.
+Application web de gestion des étudiants développée avec **FastAPI**, **PostgreSQL**, **HTML/CSS** et **JavaScript** dans le cadre de la formation ODC.
 
-Le projet permet de gérer les étudiants à travers une API, de rechercher et paginer les données, d'archiver ou restaurer des étudiants et d'importer automatiquement des données provenant d'un fichier JSON.
+Le projet permet de gérer les étudiants, leurs classes et leurs notes à travers une API REST et une interface frontend.
 
 ---
 
@@ -11,55 +10,93 @@ Le projet permet de gérer les étudiants à travers une API, de rechercher et p
 
 **Student Analytics App** est une application de gestion des données étudiantes composée de :
 
-* un **backend REST** développé avec FastAPI ;
-* une base de données **PostgreSQL** ;
-* des données d'entrée au format **JSON** ;
-* une interface frontend en **HTML / CSS / JavaScript** ;
-* une documentation interactive de l'API grâce à **Swagger UI**.
+* un backend REST développé avec **FastAPI** ;
+* une base de données relationnelle **PostgreSQL** ;
+* un frontend en **HTML / CSS / JavaScript** ;
+* un système d'importation de données depuis un fichier **JSON** ;
+* une gestion des **notes des étudiants** ;
+* une documentation interactive de l'API avec **Swagger / OpenAPI**.
 
-L'objectif principal du projet est de mettre en pratique la création d'une API, la connexion à une base de données relationnelle et la manipulation de données provenant de différentes sources.
+L'objectif du projet est de mettre en pratique le développement d'une API, la gestion d'une base de données relationnelle et l'intégration de données provenant de différentes sources.
 
 ---
 
-## 🎯 Objectifs
+## 🎯 Fonctionnalités
 
-Ce projet permet de mettre en pratique :
+### 👨‍🎓 Gestion des étudiants
 
-* la création d'une API avec FastAPI ;
-* la création et l'utilisation de routes REST ;
-* la connexion entre Python et PostgreSQL ;
-* les opérations CRUD sur les étudiants ;
-* la pagination des résultats ;
-* la recherche d'étudiants ;
-* l'archivage et la restauration des étudiants ;
-* la validation des données avec Pydantic ;
-* l'importation de données JSON ;
-* la gestion des relations entre étudiants, classes, matières et notes ;
-* la communication entre frontend et backend avec CORS.
+L'application permet de :
+
+* consulter la liste des étudiants ;
+* rechercher un étudiant ;
+* paginer les résultats ;
+* consulter le détail d'un étudiant ;
+* ajouter un étudiant ;
+* modifier les informations d'un étudiant ;
+* archiver un étudiant ;
+* restaurer un étudiant.
+
+### 📝 Gestion des notes
+
+L'application intègre également les **notes des étudiants**.
+
+Les données permettent notamment de gérer :
+
+* les matières ;
+* les moyennes par matière ;
+* les notes de devoirs ;
+* les notes d'examen ;
+* les relations entre étudiants et matières.
+
+Les notes sont intégrées lors de l'importation des données JSON et sont stockées dans PostgreSQL.
+
+### 📥 Importation JSON
+
+L'application permet d'importer les données présentes dans :
+
+```text
+data/valides.json
+```
+
+L'importation permet de traiter :
+
+```text
+Étudiants
+    ↓
+Classes
+    ↓
+Matières
+    ↓
+Moyennes
+    ↓
+Devoirs
+    ↓
+Examens
+```
 
 ---
 
 ## 🏗️ Architecture
 
 ```text
-                    ┌─────────────────────┐
-                    │      Frontend       │
-                    │ HTML / CSS / JS     │
-                    └──────────┬──────────┘
+                    ┌──────────────────────┐
+                    │       Frontend       │
+                    │    HTML / CSS / JS   │
+                    └──────────┬───────────┘
                                │
                                │ HTTP / REST
                                ▼
-                    ┌─────────────────────┐
-                    │       FastAPI       │
-                    │       Backend       │
-                    └──────────┬──────────┘
+                    ┌──────────────────────┐
+                    │       FastAPI        │
+                    │       Backend        │
+                    └──────────┬───────────┘
                                │
                  ┌─────────────┴─────────────┐
                  │                           │
                  ▼                           ▼
         ┌─────────────────┐         ┌─────────────────┐
-        │  Fichier JSON   │         │   PostgreSQL    │
-        │   valides.json  │────────►│    Database     │
+        │   JSON source   │         │   PostgreSQL    │
+        │  valides.json   │────────►│    Database     │
         └─────────────────┘         └─────────────────┘
 ```
 
@@ -79,24 +116,25 @@ Ce projet permet de mettre en pratique :
 ### Base de données
 
 * **PostgreSQL**
-* SQL
+* **SQL**
 
 ### Frontend
 
-* HTML5
-* CSS3
-* JavaScript
+* **HTML5**
+* **CSS3**
+* **JavaScript**
 
 ### Données
 
-* JSON
-* CSV
-* Pandas
+* **JSON**
+* **CSV**
+* **Pandas**
 
-### Documentation API
+### Outils
 
-* Swagger UI
-* OpenAPI
+* **Swagger / OpenAPI**
+* **Git**
+* **GitHub**
 
 ---
 
@@ -138,7 +176,6 @@ student-analytics-app/
 │   ├── run.sh
 │   └── setup.sh
 │
-├── .env
 ├── .gitignore
 ├── requirements.txt
 └── README.md
@@ -146,113 +183,15 @@ student-analytics-app/
 
 ---
 
-## ⚙️ Installation
-
-### 1. Cloner le projet
-
-```bash
-git clone git@github.com:ramata-seck/student-analytics-app.git
-cd student-analytics-app
-```
-
-### 2. Créer un environnement virtuel
-
-```bash
-python3 -m venv venv
-```
-
-Activer l'environnement :
-
-```bash
-source venv/bin/activate
-```
-
-### 3. Installer les dépendances
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 🗄️ Configuration PostgreSQL
-
-Le projet utilise PostgreSQL comme système de gestion de base de données.
-
-Les informations de connexion sont stockées dans un fichier `.env` afin de ne pas exposer les identifiants dans le code source.
-
-Exemple de structure :
-
-```env
-DB_HOST=localhost
-DB_NAME=nom_de_la_base
-DB_USER=nom_utilisateur
-DB_PASSWORD=votre_mot_de_passe
-DB_PORT=5432
-```
-
-> ⚠️ Le fichier `.env` ne doit pas être publié sur GitHub. Il est déjà exclu du dépôt grâce au `.gitignore`.
-
----
-
-## 🏗️ Initialisation de la base de données
-
-Le script SQL d'initialisation se trouve dans :
-
-```text
-Backend/sql/init.sql
-```
-
-Il permet de préparer la structure nécessaire au fonctionnement de l'application.
-
----
-
-## ▶️ Lancer l'application
-
-Depuis le dossier `Backend` :
-
-```bash
-cd Backend
-uvicorn main:app --reload
-```
-
-L'API sera alors accessible à :
-
-```text
-http://127.0.0.1:8000
-```
-
----
-
-## 📚 Documentation de l'API
-
-FastAPI génère automatiquement une documentation interactive.
-
-### Swagger UI
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-### OpenAPI
-
-```text
-http://127.0.0.1:8000/openapi.json
-```
-
-Swagger permet de tester directement les différentes routes de l'API.
-
----
-
-# 🔌 Endpoints disponibles
+# 🔌 API REST
 
 ## Vérification de l'API
 
 ### `GET /api/v1/health`
 
-Permet de vérifier que le serveur fonctionne correctement.
+Permet de vérifier que le serveur fonctionne.
 
-Réponse :
+Exemple de réponse :
 
 ```json
 {
@@ -287,7 +226,7 @@ Recherche :
 GET /api/v1/etudiants?recherche=Seck
 ```
 
-Filtrer les étudiants archivés :
+Étudiants archivés :
 
 ```text
 GET /api/v1/etudiants?archive=true
@@ -297,23 +236,19 @@ GET /api/v1/etudiants?archive=true
 
 ### `GET /api/v1/etudiants/{id}`
 
-Retourne les informations d'un étudiant à partir de son identifiant.
-
-Exemple :
+Permet de consulter un étudiant à partir de son identifiant.
 
 ```text
 GET /api/v1/etudiants/1
 ```
 
-Si l'étudiant n'existe pas, l'API retourne une erreur `404`.
-
 ---
 
 ### `POST /api/v1/etudiants`
 
-Permet d'ajouter un nouvel étudiant.
+Permet d'ajouter un étudiant.
 
-Exemple de données :
+Exemple :
 
 ```json
 {
@@ -330,28 +265,19 @@ Exemple de données :
 
 ### `PATCH /api/v1/etudiants/{id}`
 
-Permet de modifier certaines informations d'un étudiant existant.
-
-Exemple :
+Permet de modifier les informations d'un étudiant existant.
 
 ```text
 PATCH /api/v1/etudiants/1
 ```
 
-Les informations pouvant être modifiées comprennent notamment :
-
-* le nom ;
-* le prénom ;
-* la date de naissance ;
-* la classe.
-
 ---
 
-## 📦 Archivage des étudiants
+## 📦 Archivage
 
 ### `POST /api/v1/etudiants/{id}/archive`
 
-Permet d'archiver un étudiant.
+Archive un étudiant.
 
 ```text
 POST /api/v1/etudiants/1/archive
@@ -359,7 +285,7 @@ POST /api/v1/etudiants/1/archive
 
 ### `POST /api/v1/etudiants/{id}/restore`
 
-Permet de restaurer un étudiant précédemment archivé.
+Restaure un étudiant.
 
 ```text
 POST /api/v1/etudiants/1/restore
@@ -367,74 +293,84 @@ POST /api/v1/etudiants/1/restore
 
 ---
 
-# 📥 Import des données JSON
+# 📥 Importation des données
 
 ### `POST /api/v1/import/json`
 
-Cette route permet d'importer automatiquement les données présentes dans :
+Cette route permet d'importer les données depuis :
 
 ```text
 data/valides.json
 ```
 
-Le processus d'importation :
+Le processus permet de :
+
+1. lire le fichier JSON ;
+2. vérifier ou créer les classes ;
+3. insérer les étudiants ;
+4. vérifier ou créer les matières ;
+5. associer les étudiants aux matières ;
+6. enregistrer les moyennes ;
+7. enregistrer les notes de devoirs ;
+8. enregistrer les notes d'examen ;
+9. sauvegarder les données dans PostgreSQL.
+
+### Flux d'importation
 
 ```text
-valides.json
-      │
-      ▼
-Lecture du fichier
-      │
-      ▼
-Vérification / création des classes
-      │
-      ▼
-Insertion des étudiants
-      │
-      ▼
-Vérification / création des matières
-      │
-      ▼
-Association étudiants ↔ matières
-      │
-      ▼
-Insertion des notes
-      │
-      ▼
-PostgreSQL
+                  valides.json
+                       │
+                       ▼
+                 Lecture JSON
+                       │
+                       ▼
+                   Classes
+                       │
+                       ▼
+                  Étudiants
+                       │
+                       ▼
+                   Matières
+                       │
+                       ▼
+             ┌─────────┴─────────┐
+             ▼                   ▼
+        Devoirs              Examens
+             │                   │
+             └─────────┬─────────┘
+                       ▼
+                 PostgreSQL
 ```
 
-Cette fonctionnalité permet notamment de manipuler des données structurées provenant d'une source externe avant leur intégration dans une base relationnelle.
-
 ---
 
-## 🔐 Gestion des variables d'environnement
+# 📝 Structure des notes
 
-Les informations sensibles ne sont pas directement écrites dans le code.
+Les notes sont organisées autour de la relation entre un étudiant et une matière.
 
-La connexion PostgreSQL utilise les variables définies dans `.env`.
+```text
+Étudiant
+    │
+    └── Matière
+          │
+          ├── Moyenne
+          ├── Devoirs
+          └── Examen
+```
 
-Le fichier `.env` est exclu du dépôt grâce au `.gitignore`.
-
----
-
-## 🌐 CORS
-
-Le backend utilise le middleware **CORS** afin de permettre au frontend de communiquer avec l'API.
-
-Cela permet notamment au frontend JavaScript d'effectuer des requêtes HTTP vers le backend FastAPI.
+Cette organisation permet de conserver les informations académiques dans plusieurs tables reliées entre elles.
 
 ---
 
 ## 🖥️ Frontend
 
-Le projet contient également une interface frontend développée avec :
+L'application possède une interface frontend développée avec :
 
 * HTML ;
 * CSS ;
 * JavaScript.
 
-Les fichiers principaux sont :
+Principaux fichiers :
 
 ```text
 Frontend/
@@ -447,13 +383,109 @@ Frontend/
     └── dashboard.js
 ```
 
-Le frontend communique avec les endpoints de l'API pour exploiter les données étudiantes.
+Le frontend communique avec l'API FastAPI pour afficher et manipuler les données.
 
 ---
 
-## 🧪 Données
+## 📚 Documentation API
 
-Le projet contient plusieurs fichiers utilisés pour la manipulation et l'importation des données :
+FastAPI fournit automatiquement une documentation interactive.
+
+### Swagger UI
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+### OpenAPI
+
+```text
+http://127.0.0.1:8000/openapi.json
+```
+
+Swagger permet de tester directement les endpoints de l'API.
+
+---
+
+# ⚙️ Installation
+
+## 1. Cloner le projet
+
+```bash
+git clone git@github.com:ramata-seck/student-analytics-app.git
+cd student-analytics-app
+```
+
+## 2. Créer l'environnement virtuel
+
+```bash
+python3 -m venv venv
+```
+
+Activer l'environnement :
+
+```bash
+source venv/bin/activate
+```
+
+## 3. Installer les dépendances
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🗄️ Configuration PostgreSQL
+
+Les paramètres de connexion à PostgreSQL sont stockés dans un fichier `.env`.
+
+Exemple :
+
+```env
+DB_HOST=localhost
+DB_NAME=nom_de_la_base
+DB_USER=nom_utilisateur
+DB_PASSWORD=votre_mot_de_passe
+DB_PORT=5432
+```
+
+Le fichier `.env` est exclu du dépôt Git grâce au `.gitignore`.
+
+---
+
+# ▶️ Lancer le backend
+
+Depuis le dossier `Backend` :
+
+```bash
+cd Backend
+uvicorn main:app --reload
+```
+
+L'API est alors disponible à :
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+# 🧪 Tests avec Swagger
+
+Une fois le serveur lancé, ouvrir :
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Les endpoints peuvent être testés directement depuis l'interface Swagger.
+
+---
+
+# 📊 Données
+
+Les données du projet sont présentes dans :
 
 ```text
 data/
@@ -467,49 +499,58 @@ Les données présentes dans `valides.json` sont des données fictives utilisée
 
 ---
 
-## 📈 Compétences mises en pratique
+# 🔐 Sécurité
 
-À travers ce projet, les principales compétences travaillées sont :
+Les informations sensibles ne sont pas stockées directement dans le code source.
+
+Les paramètres de connexion à PostgreSQL utilisent des variables d'environnement définies dans `.env`.
+
+Le fichier `.env` est exclu du dépôt Git.
+
+---
+
+# 📈 Compétences mises en pratique
+
+Ce projet m'a permis de travailler sur :
 
 * développement d'API REST ;
-* FastAPI ;
 * Python ;
-* SQL ;
+* FastAPI ;
 * PostgreSQL ;
-* conception de routes ;
-* validation des données ;
-* connexion application ↔ base de données ;
-* import de données JSON ;
-* manipulation de données ;
+* SQL ;
+* Pydantic ;
+* manipulation de données JSON ;
+* relations entre tables ;
+* gestion des étudiants ;
+* gestion des notes ;
 * pagination et recherche ;
 * gestion des erreurs HTTP ;
 * CORS ;
-* documentation OpenAPI / Swagger ;
-* séparation backend / frontend ;
-* gestion des variables d'environnement ;
+* documentation Swagger/OpenAPI ;
+* séparation frontend/backend ;
+* variables d'environnement ;
 * Git et GitHub.
 
 ---
 
-## 🚀 Améliorations possibles
+# 🚀 Améliorations possibles
 
-Les évolutions suivantes pourraient être ajoutées ultérieurement :
+Les évolutions suivantes peuvent être envisagées :
 
-* authentification et gestion des utilisateurs ;
-* gestion plus complète des erreurs et des transactions ;
-* amélioration de la gestion des doublons lors de l'import JSON ;
-* ajout de statistiques dédiées ;
-* tests automatisés avec Pytest ;
-* conteneurisation avec Docker ;
-* amélioration de la validation des données ;
-* documentation API plus détaillée ;
-* déploiement de l'application.
+* ajouter une authentification ;
+* améliorer la gestion des erreurs et des transactions ;
+* renforcer la gestion des doublons lors de l'import JSON ;
+* ajouter des tests automatisés avec Pytest ;
+* ajouter des statistiques académiques ;
+* conteneuriser l'application avec Docker ;
+* améliorer la validation des données ;
+* déployer l'application.
 
 ---
 
 ## 👩‍💻 Contexte
 
-Projet réalisé dans le cadre de la formation **ODC**, avec pour objectif de mettre en pratique le développement d'API et la gestion de données.
+Projet réalisé dans le cadre de la formation **ODC**, avec pour objectif de mettre en pratique le développement d'API REST, la gestion de bases de données et l'intégration de données.
 
 ---
 
